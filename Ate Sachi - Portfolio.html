@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Althea Viernes — Creative Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --charcoal: #121110;
+    --charcoal-deep: #0b0a09;
+    --panel: #171614;
+    --cream: #f3eee2;
+    --cream-dim: #948d7c;
+    --gold: #bfa05a;
+    --line: rgba(243,238,226,0.12);
+    --line-strong: rgba(243,238,226,0.22);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--charcoal);
+    color:var(--cream);
+    font-family:'Inter',sans-serif;
+    font-weight:400;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+    line-height:0.95;
+    margin:0;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+  @media (max-width:640px){.wrap{padding:0 20px;}}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 32px;
+    background:linear-gradient(to bottom, rgba(11,10,9,0.9), rgba(11,10,9,0));
+    transition:background .3s ease, padding .3s ease;
+  }
+  header.nav.scrolled{background:rgba(11,10,9,0.92);backdrop-filter:blur(6px);padding:14px 32px;border-bottom:1px solid var(--line);}
+  .nav-mark{font-family:'Barlow Condensed';font-weight:800;font-size:22px;letter-spacing:0.02em;text-transform:uppercase;}
+  .nav-links{display:flex;gap:34px;font-size:14px;letter-spacing:0.02em;}
+  .nav-links a{opacity:0.78;transition:opacity .2s;}
+  .nav-links a:hover{opacity:1;}
+  .nav-toggle{display:none;background:none;border:none;color:var(--cream);font-size:26px;cursor:pointer;}
+  @media (max-width:800px){
+    .nav-links{position:fixed;top:0;right:0;height:100vh;width:78%;max-width:320px;
+      background:var(--charcoal-deep);flex-direction:column;justify-content:center;
+      gap:28px;padding:40px;transform:translateX(100%);transition:transform .35s ease;
+      border-left:1px solid var(--line);font-size:20px;}
+    .nav-links.open{transform:translateX(0);}
+    .nav-toggle{display:block;z-index:110;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;min-height:100vh;
+    background:radial-gradient(120% 100% at 50% 0%, #1a1815 0%, var(--charcoal-deep) 62%);
+    display:flex;align-items:center;overflow:hidden;
+    padding:120px 0 80px;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:minmax(0,1.08fr) minmax(280px,.92fr);align-items:center;gap:clamp(32px,6vw,88px);
+    width:100%;
+  }
+  .hero-type{position:relative;z-index:3;}
+  .hero-eyebrow{font-size:14px;color:var(--gold);letter-spacing:0.04em;margin-bottom:18px;}
+  .hero-title{font-size:clamp(52px,8vw,104px);}
+  .hero-title .outline{
+    -webkit-text-stroke:1.5px var(--cream);
+    color:transparent;
+    display:block;
+  }
+  .hero-title .solid{display:block;color:var(--cream);}
+  .hero-sub{max-width:380px;margin-top:26px;color:var(--cream-dim);font-size:16px;}
+  .hero-cta{display:flex;gap:16px;margin-top:38px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:14px 26px;font-size:14px;letter-spacing:0.02em;
+    border-radius:2px;transition:transform .2s ease, background .2s ease, color .2s ease;
+    font-weight:500;
+  }
+  .btn-primary{background:var(--cream);color:var(--charcoal-deep);}
+  .btn-primary:hover{background:var(--gold);transform:translateY(-2px);}
+  .btn-ghost{border:1px solid var(--line-strong);color:var(--cream);}
+  .btn-ghost:hover{border-color:var(--cream);transform:translateY(-2px);}
+
+  .hero-portrait{
+    position:relative;z-index:2;
+    width:min(100%,440px);justify-self:center;align-self:center;
+    aspect-ratio:3/4;border-radius:2px;overflow:hidden;border:1px solid var(--line-strong);
+    background:
+      radial-gradient(120% 90% at 30% 20%, #3a3226 0%, transparent 55%),
+      linear-gradient(160deg,#2a2621 0%, #17150f 100%);
+    display:flex;align-items:flex-end;justify-content:center;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.6);
+  }
+  .hero-portrait::after{
+    content:"PORTRAIT / PHOTOGRAPHY";
+    color:var(--cream-dim);font-size:12px;letter-spacing:0.08em;
+    padding:16px;border:1px dashed var(--line-strong);margin:20px;border-radius:2px;
+    font-family:'Inter';
+  }
+  .hero-portrait:has(img)::after{display:none;}
+  .hero-behind{
+    position:absolute;z-index:1;top:50%;left:52%;transform:translate(-50%,-50%);
+    font-size:clamp(90px,16vw,220px);
+    font-family:'Barlow Condensed';font-weight:800;color:var(--panel);
+    -webkit-text-stroke:1px var(--line-strong);
+    white-space:nowrap;pointer-events:none;letter-spacing:0.01em;
+  }
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-portrait{order:-1;max-width:280px;margin:0 auto 20px;}
+    .hero-behind{display:none;}
+  }
+
+  /* ---------- SECTION HEADS ---------- */
+  section{padding:120px 0;border-top:1px solid var(--line);}
+  @media (max-width:640px){section{padding:80px 0;}}
+  .section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:56px;flex-wrap:wrap;}
+  .section-num{font-size:14px;color:var(--gold);letter-spacing:0.04em;margin-bottom:10px;}
+  .section-title{font-size:clamp(32px,5vw,52px);}
+  .section-note{max-width:320px;color:var(--cream-dim);font-size:15px;}
+
+  /* ---------- SCROLL REVEAL ---------- */
+  .reveal{
+    opacity:0;transform:translateY(42px);transition:opacity .75s ease, transform .75s cubic-bezier(.2,.7,.2,1);
+  }
+  .reveal.visible{opacity:1;transform:none;}
+
+  /* ---------- SERVICES ---------- */
+  .services{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line);}
+  .service{
+    padding:44px 30px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);
+    position:relative;overflow:hidden;transition:background .25s ease;
+  }
+  .service:hover{background:var(--panel);}
+  .service-index{font-family:'Barlow Condensed';font-size:15px;color:var(--gold);margin-bottom:70px;}
+  .service h3{font-size:24px;margin-bottom:14px;}
+  .service p{font-size:14px;color:var(--cream-dim);margin:0;}
+  @media (max-width:900px){.services{grid-template-columns:1fr 1fr;}}
+  @media (max-width:560px){.services{grid-template-columns:1fr;}}
+
+  /* ---------- WORK ---------- */
+  .filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:44px;}
+  .filter-btn{
+    padding:9px 18px;font-size:13px;border:1px solid var(--line-strong);border-radius:20px;
+    background:transparent;color:var(--cream-dim);cursor:pointer;transition:all .2s ease;
+    font-family:'Inter';letter-spacing:0.01em;
+  }
+  .filter-btn:hover{color:var(--cream);border-color:var(--cream);}
+  .filter-btn.active{background:var(--cream);color:var(--charcoal-deep);border-color:var(--cream);font-weight:500;}
+
+  /* Masonry: column-count flows cards down each column and lets each
+     card's height follow its own content, so a card with a tall image
+     sits taller than a card with a wide/short image — no fixed crop. */
+  .work-grid{
+    column-count:3;column-gap:18px;
+  }
+  .work-card{
+    display:inline-block;width:100%;break-inside:avoid;-webkit-column-break-inside:avoid;
+    margin-bottom:18px;border-radius:2px;overflow:hidden;cursor:pointer;
+    background:var(--panel);border:1px solid var(--line);transition:transform .25s ease, border-color .25s ease;
+  }
+  .work-card:hover{transform:translateY(-4px);border-color:var(--line-strong);}
+  .work-thumb{
+    position:relative;
+    background:linear-gradient(135deg,var(--wc1,#2a2621),var(--wc2,#161410));
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+  }
+  /* No image yet: fall back to a fixed placeholder ratio */
+  .work-thumb:not(.has-image){aspect-ratio:4/3;}
+  /* Real image: let the <img>'s own intrinsic size set the thumb's
+     height, so the card's proportions come from the photo itself */
+  .work-thumb.has-image{aspect-ratio:auto;display:block;}
+  .work-thumb span{
+    font-family:'Barlow Condensed';font-size:13px;color:var(--cream-dim);
+    letter-spacing:0.08em;border:1px dashed var(--line-strong);padding:8px 14px;border-radius:2px;
+  }
+  .work-thumb.has-image img{
+    width:100%;height:auto;display:block;
+  }
+  .work-meta{padding:18px 20px;}
+  .work-meta .tag{font-size:11px;color:var(--gold);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px;display:block;}
+  .work-meta h4{font-family:'Barlow Condensed';font-weight:700;font-size:19px;text-transform:none;letter-spacing:0;}
+  .work-multitag{margin:8px 0 0;font-size:11.5px;color:var(--cream-dim);letter-spacing:0.02em;}
+  .work-card.hidden{display:none;}
+  .work-empty{column-span:all;padding:60px 20px;text-align:center;color:var(--cream-dim);font-size:14px;border:1px dashed var(--line-strong);border-radius:2px;}
+  @media (max-width:900px){
+    .work-grid{column-count:2;}
+  }
+  @media (max-width:560px){
+    .work-grid{column-count:1;}
+  }
+
+  /* ---------- MODAL ---------- */
+  .modal-overlay{
+    position:fixed;inset:0;background:rgba(11,10,9,0.92);z-index:200;
+    display:none;align-items:flex-start;justify-content:center;overflow-y:auto;padding:60px 20px;
+    backdrop-filter:blur(4px);
+  }
+  .modal-overlay.open{display:flex;}
+  .modal{max-width:980px;width:100%;background:var(--charcoal);border:1px solid var(--line);border-radius:2px;}
+  .qr-modal{max-width:480px;padding-bottom:28px;}
+  .qr-modal h3{padding:0 28px;margin:0 0 8px;font-size:32px;}
+  .qr-modal p{padding:0 28px;margin:0 0 22px;color:var(--cream-dim);font-size:14px;}
+  .qr-code{width:min(320px,calc(100% - 56px));margin:0 auto;background:#fff;padding:16px;border-radius:2px;}
+  .qr-code img{width:100%;height:auto;display:block;}
+  .modal-close{
+    position:sticky;top:0;display:flex;justify-content:flex-end;padding:16px 16px 0;z-index:5;
+  }
+  .modal-close button{background:none;border:1px solid var(--line-strong);color:var(--cream);
+    width:36px;height:36px;border-radius:50%;font-size:16px;cursor:pointer;}
+  .modal-gallery{margin:0 16px;}
+  .modal-hero{position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,#2f2a22,#161410);
+    display:flex;align-items:center;justify-content:center;border-radius:2px;overflow:hidden;touch-action:pan-y;}
+  .modal-hero img{width:100%;height:100%;object-fit:contain;display:block;background:#0d0c0b;}
+  .modal-hero.has-video{aspect-ratio:auto;min-height:0;padding:24px;background:#080706;}
+  .embedded-video-wrap{max-width:100%;overflow:hidden;border-radius:8px;background:#000;
+    box-shadow:0 20px 45px rgba(0,0,0,.42);}
+  .facebook-video-wrap{height:min(570px,72vh);aspect-ratio:267/476;}
+  .instagram-video-wrap{width:min(405px,100%);height:min(700px,78vh);}
+  .embedded-video-frame{display:block;width:100%;height:100%;border:0;background:#000;}
+  .local-video-wrap{width:min(960px,100%);aspect-ratio:16/9;max-width:100%;overflow:hidden;
+    border-radius:8px;background:#000;box-shadow:0 20px 45px rgba(0,0,0,.42);}
+  .local-video-player{display:block;width:100%;height:100%;object-fit:contain;background:#000;}
+  .gallery-empty{width:100%;height:100%;background:linear-gradient(135deg,#2f2a22,#161410);}
+  .gallery-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:44px;height:44px;
+    display:flex;align-items:center;justify-content:center;border:1px solid var(--line-strong);border-radius:50%;
+    background:rgba(11,10,9,.74);color:var(--cream);font-size:22px;cursor:pointer;transition:background .2s ease,border-color .2s ease;}
+  .gallery-arrow:hover{background:var(--cream);color:var(--charcoal-deep);border-color:var(--cream);}
+  .gallery-arrow:disabled{opacity:.28;cursor:default;}
+  .gallery-arrow:disabled:hover{background:rgba(11,10,9,.74);color:var(--cream);border-color:var(--line-strong);}
+  .gallery-prev{left:16px;}.gallery-next{right:16px;}
+  .gallery-status{display:flex;align-items:center;justify-content:flex-end;gap:16px;padding:12px 2px 10px;
+    color:var(--cream-dim);font-size:12px;letter-spacing:.04em;}
+  .gallery-thumbs{display:flex;gap:10px;overflow-x:auto;padding:0 0 8px;scrollbar-width:thin;scrollbar-color:var(--line-strong) transparent;}
+  .gallery-thumb{flex:0 0 92px;aspect-ratio:4/3;padding:0;overflow:hidden;border:1px solid var(--line);border-radius:2px;
+    background:linear-gradient(145deg,#25211c,#12100e);color:var(--cream-dim);cursor:pointer;transition:border-color .2s ease,opacity .2s ease;}
+  .gallery-thumb:hover{border-color:var(--cream-dim);}
+  .gallery-thumb.active{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold);}
+  .gallery-thumb img{width:100%;height:100%;object-fit:cover;}
+  .gallery-thumb .gallery-empty{background:linear-gradient(145deg,#25211c,#12100e);}
+  .gallery-video-thumb{display:flex;align-items:center;justify-content:center;width:100%;height:100%;
+    background:linear-gradient(145deg,#28231d,#0d0c0a);color:var(--gold);font-size:24px;}
+  .modal-body{padding:36px 44px 48px;}
+  .modal-body .tag{color:var(--gold);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;}
+  .modal-body h3{font-size:38px;margin:10px 0 18px;}
+  .modal-body p{color:var(--cream-dim);max-width:560px;font-size:15px;}
+  @media (max-width:600px){
+    .modal-overlay{padding:18px 10px;}
+    .modal-gallery{margin:0 10px;}
+    .modal-hero{aspect-ratio:4/3;}
+    .modal-hero.has-video{aspect-ratio:auto;min-height:0;padding:14px 42px;}
+    .facebook-video-wrap{height:min(67vh,560px);}
+    .instagram-video-wrap{width:min(100%,390px);height:min(70vh,650px);}
+    .local-video-wrap{height:min(70vh,650px);}
+    .gallery-arrow{width:38px;height:38px;}
+    .gallery-prev{left:10px;}.gallery-next{right:10px;}
+    .gallery-thumb{flex-basis:76px;}
+    .modal-body{padding:24px;}
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:80px;}
+  .about-photo{aspect-ratio:3/4;background:linear-gradient(160deg,#2a2621,#131110);border-radius:2px;
+    display:flex;align-items:flex-end;justify-content:center;}
+  .about-photo span{color:var(--cream-dim);font-size:12px;border:1px dashed var(--line-strong);padding:10px 16px;margin:18px;}
+  .about-copy p{font-size:17px;color:var(--cream-dim);margin-bottom:20px;}
+  .about-copy strong{color:var(--cream);font-weight:500;}
+  .timeline{margin-top:50px;border-left:1px solid var(--line-strong);padding-left:28px;}
+  .timeline-item{position:relative;padding-bottom:34px;}
+  .timeline-item:last-child{padding-bottom:0;}
+  .timeline-item::before{content:"";position:absolute;left:-33px;top:6px;width:9px;height:9px;border-radius:50%;background:var(--gold);}
+  .timeline-item .year{font-size:13px;color:var(--gold);letter-spacing:0.03em;}
+  .timeline-item h4{font-family:'Barlow Condensed';font-weight:700;font-size:20px;text-transform:none;margin:4px 0;}
+  .timeline-item p{margin:0;color:var(--cream-dim);font-size:14px;}
+  @media (max-width:800px){.about-grid{grid-template-columns:1fr;gap:40px;}.about-photo{max-width:280px;}}
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testi-wrap{max-width:760px;margin:0 auto;text-align:left;position:relative;}
+  .testi-slide{display:none;}
+  .testi-slide.active{display:block;}
+  .testi-quote{font-family:'Barlow Condensed';font-weight:500;font-size:clamp(24px,3.4vw,34px);
+    text-transform:none;line-height:1.25;color:var(--cream);}
+  .testi-meta{margin-top:26px;display:flex;gap:12px;align-items:center;font-size:14px;color:var(--cream-dim);}
+  .testi-meta .dot{width:5px;height:5px;border-radius:50%;background:var(--gold);}
+  .testi-nav{display:flex;gap:10px;margin-top:40px;}
+  .testi-dot{width:8px;height:8px;border-radius:50%;background:var(--line-strong);border:none;cursor:pointer;padding:0;}
+  .testi-dot.active{background:var(--gold);}
+
+  /* ---------- CONTACT ---------- */
+  .contact{text-align:left;}
+  .contact-title{font-size:clamp(38px,7vw,80px);max-width:760px;}
+  .contact-title a{border-bottom:2px solid var(--gold);}
+  .contact-row{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;margin-top:50px;padding-top:30px;border-top:1px solid var(--line);}
+  .contact-links{display:flex;gap:28px;font-size:14px;flex-wrap:wrap;}
+  .contact-links a{color:var(--cream-dim);}
+  .contact-links a:hover{color:var(--cream);}
+  footer{padding:28px 0;font-size:12px;color:var(--cream-dim);}
+
+  ::selection{background:var(--gold);color:var(--charcoal-deep);}
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important;transition:none !important;scroll-behavior:auto !important;}
+  }
+  .timeline{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px 28px;
+  margin-top:34px;
+  padding-left:0;
+  border-left:0;
+}
+
+.timeline-item{
+  padding:18px 0;
+  border-top:1px solid var(--line);
+}
+
+.timeline-item::before{
+  display:none;
+}
+
+.timeline-item .year{
+  font-size:11px;
+  color:var(--gold);
+  letter-spacing:.04em;
+  text-transform:uppercase;
+}
+
+.timeline-item h4{
+  font-size:18px;
+  line-height:1.1;
+  margin:6px 0 3px;
+}
+
+.timeline-item p{
+  font-size:13px;
+  color:var(--cream-dim);
+}
+
+@media(max-width:800px){
+  .timeline{
+    grid-template-columns:1fr;
+    gap:0;
+  }
+}
+  .hero-portrait img {
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
+    object-position:50% 50%;
+  }
+.about-photo {
+  overflow: hidden;
+}
+
+.about-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <a href="#top" class="nav-mark">Althea Viernes</a>
+  <nav class="nav-links" id="navLinks">
+    <a href="#about">Experience</a>
+    <a href="#services">Services</a>
+    <a href="#work">Projects</a>
+    <a href="#testimonials">Testimonials</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+</header>
+
+<!-- HERO -->
+<div class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="hero-behind">Portfolio</div>
+    <div class="hero-type">
+      <div class="hero-eyebrow">Brand · Design · Strategy — Philippines</div>
+      <h1 class="hero-title">
+        <span class="outline">CREATIVE</span>
+        <span class="solid">PORTFOLIO</span>
+      </h1>
+      <p class="hero-sub">Hi there! I’m Althea, a <strong>Creative Marketing Specialist & 
+      Social Media Specialist</strong> from the Philippines.
+    <br><br>
+  I help brands that are serious about growth elevate their presence through compelling branding, high-converting creatives, and strategic social media content that drives engagement, traffic, and sales.</p>
+      <div class="hero-cta">
+        <a href="#work" class="btn btn-primary">View work</a>
+        <a href="#contact" class="btn btn-ghost">Get in touch</a>
+      </div>
+    </div>
+    <div class="hero-portrait" id="heroPortrait">
+  <img src="images/portrait.png" alt="Althea Viernes">
+</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services" class="reveal">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-num">02 — Services</div>
+        <h2 class="section-title">Services Offered</h2>
+      </div>
+    </div>
+  </div>
+  <div class="services">
+    <div class="service">
+      <div class="service-index">01</div>
+      <h3>Visual Branding</h3>
+      <p>Moodboard, logo variations, color palettes, typography pairing, brand pattern, brand presentation and guidelines, templates, packaging and mockups.</p>
+    </div>
+    <div class="service">
+      <div class="service-index">02</div>
+      <h3>Graphic Design</h3>
+      <p>Digital and printable designs, marketing collaterals, stationery design items, and social media designs.</p>
+    </div>
+    <div class="service">
+      <div class="service-index">03</div>
+      <h3>Social Media Management</h3>
+      <p>Social media strategy, competitor analysis, copywriting, content creation/calendar, graphic design, scheduling of posts, and reporting.</p>
+    </div>
+    <div class="service">
+      <div class="service-index">04</div>
+      <h3>Marketing Strategist</h3>
+      <p>Market and audience analysis. Plan content, promotions, and customer journeys while tracking performance and optimizing for engagement, leads, and sales.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work" class="reveal">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-num">03 — Selected work</div>
+        <h2 class="section-title">Recent projects</h2>
+      </div>
+      <p class="section-note"></p>
+    </div>
+
+    <div class="filters" id="filters">
+      <button class="filter-btn active" data-tag="all">All</button>
+      <button class="filter-btn" data-tag="analytics">Social Media Analytics</button>
+      <button class="filter-btn" data-tag="branding">Brand boards</button>
+      <button class="filter-btn" data-tag="social">Social content</button>
+      <button class="filter-btn" data-tag="packaging">Packaging</button>
+      <button class="filter-btn" data-tag="email">Email design</button>
+      <button class="filter-btn" data-tag="collateral">Marketing collateral</button>
+      <button class="filter-btn" data-tag="video">Video editing</button>
+    </div>
+
+    <div class="work-grid" id="workGrid"><!-- injected --></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="reveal">
+  <div class="wrap about-grid">
+    <div>
+      <div class="about-photo">
+  <img src="images/portrait2.png" alt="Althea Viernes">
+</div>
+    </div>
+    <div>
+      <div class="section-num">01 — Working Experience</div>
+      <h2 class="section-title" style="margin-bottom:24px;">ALTHEA VIERNES</h2>
+      <div class="about-copy">
+        <p><strong>
+My experience spans e-commerce, real estate, affiliate marketing, and service-based industries, where I’ve produced high-impact social media branding, marketing visuals, email designs, and product creatives aligned with brand identity and business goals. I specialize in blending creativity with marketing psychology to create content that performs across platforms.
+<br><br>I aim to help brands grow their digital presence, stand out in crowded markets, and attract their ideal audience through strategy-backed creativity.</p>
+      <div class="timeline">
+  <div class="timeline-item">
+    <div class="year">Jan 2026 — Present</div>
+    <h4>Project Manager</h4>
+    <p>JiYu Korean Skin Care</p>
+  </div>
+
+  <div class="timeline-item">
+    <div class="year">Oct 2025 — Present</div>
+    <h4>Creative Product Specialist</h4>
+    <p>CertCommerce</p>
+  </div>
+
+  <div class="timeline-item">
+    <div class="year">Sept 2025 — Present</div>
+    <h4>Creative Marketing Specialist &amp; Graphic Designer</h4>
+    <p>Keller Williams Westlake Village</p>
+  </div>
+
+  <div class="timeline-item">
+    <div class="year">May 2023 — Present</div>
+    <h4>Brand &amp; Social Media Strategist</h4>
+    <p>Freelance</p>
+  </div>
+
+  <div class="timeline-item">
+    <div class="year">May 2020 — Present</div>
+    <h4>Graphic Designer</h4>
+    <p>Freelance</p>
+  </div>
+
+  <div class="timeline-item">
+    <div class="year">Sep 2025 — Dec 2025</div>
+    <h4>E-commerce Creative Marketing</h4>
+    <p>Vinted &amp; Etsy Shop</p>
+  </div>
+
+  <div class="timeline-item">
+    <div class="year">Aug 2025 — Dec 2025</div>
+    <h4>Affiliate Promotions Strategist</h4>
+    <p>JiYu Korean Skin Care</p>
+  </div>
+
+  <div class="timeline-item">
+    <div class="year">Jul 2025 — Sep 2025</div>
+    <h4>Graphic Designer &amp; Video Editor</h4>
+    <p>Goldman &amp; Associates Law Firm</p>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="reveal">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:64px;">
+      <div>
+        <div class="section-num">04 — Testimonials</div>
+        <h2 class="section-title">What clients say</h2>
+      </div>
+    </div>
+    <div class="testi-wrap">
+      <div class="testi-slide active">
+        <p class="testi-quote">"Althea, you are the best! I'm not a creative person, and I had no idea how to turn my thoughts into visuals. Our store didn't have a clear brand identity until you came in, you truly gave life to it and brought my vision to reality. You're incredibly detail-oriented and versatile in your work. This is already my second branding project with you, and you never fail to exceed my expectations."</p>
+        <div class="testi-meta"><span><b>Amir Fnine</b></span><span class="dot"></span><span>CEO, CertCommerce</span><span class="dot"></span><span>Netherlands</span></div>
+      </div>
+      <div class="testi-slide">
+        <p class="testi-quote">"Althea, you are truly exceptional. You're the only person we've hired who not only reached our target audience numbers but went beyond them. Our Al content was very challenging to market and sell, but you made it work. That's why we love working with you. You're incredibly hardworking and always deliver beyond expectations."</p>
+        <div class="testi-meta"><span><b>Sophia Kartsoulides</b></span><span class="dot"></span><span>Brand Director, JiYu Korean Skincare &amp; Co</span><span class="dot"></span><span>USA</span></div>
+      </div>
+      <div class="testi-slide">
+        <p class="testi-quote">"Althea, you are amazing! You consistently made our agents happy with your reels, email designs, flyers, brochures, and social media ads, you truly elevated our presence. We've seen a significant increase in engagement since Samara launch your work, especially your reels. The team couldn't be happier with the results."</p>
+        <div class="testi-meta"><span><b>Julie Hockenberry</b></span><span class="dot"></span><span>Marketing Director, Keller Williams Westlake Village</span><span class="dot"></span><span>USA</span></div>
+      </div>
+      <div class="testi-nav" id="testiNav"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="reveal">
+  <div class="wrap contact">
+    <h2 class="contact-title">Have a brand that needs to feel like itself? <a href="mailto:aeso.viernes.work@gmail.com">Let's talk</a>.</h2>
+    <div class="contact-row">
+      <div class="contact-links">
+        <a href="mailto:aeso.viernes.work@gmail.com">aeso.viernes.work@gmail.com</a>
+        <a href="https://www.linkedin.com/in/althea-viernes?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="#whatsappQrModal" id="whatsappLink">WhatsApp</a>
+      </div>
+      <div class="contact-links">
+        <span>+63 945 248 5811</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© 2026 Althea Viernes — Portfolio.</div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+  <div class="modal" tabindex="-1">
+    <div class="modal-close"><button id="modalClose">✕</button></div>
+    <div class="modal-gallery" aria-label="Project gallery">
+      <div class="modal-hero" id="modalHero">
+        <button class="gallery-arrow gallery-prev" id="galleryPrev" aria-label="Previous image">‹</button>
+        <div class="gallery-empty"></div>
+        <button class="gallery-arrow gallery-next" id="galleryNext" aria-label="Next image">›</button>
+      </div>
+      <div class="gallery-status" aria-live="polite">
+        <span id="galleryCounter">1 / 1</span>
+      </div>
+      <div class="gallery-thumbs" id="galleryThumbs" aria-label="Choose an image"></div>
+    </div>
+    <div class="modal-body">
+      <span class="tag" id="modalTag">Tag</span>
+      <h3 id="modalTitle">Project title</h3>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="whatsappQrModal" role="dialog" aria-modal="true" aria-labelledby="whatsappQrTitle" aria-hidden="true">
+  <div class="modal qr-modal" tabindex="-1">
+    <div class="modal-close"><button id="whatsappQrClose" aria-label="Close WhatsApp QR code">✕</button></div>
+    <h3 id="whatsappQrTitle">Scan to WhatsApp</h3>
+    <p>Scan this QR code to start a WhatsApp conversation.</p>
+    <div class="qr-code">
+      <img src="images/whatsappqr.jpg" alt="WhatsApp QR code">
+    </div>
+  </div>
+</div>
+
+<script>
+  // Place Working Experience before Services and Recent Projects in the rendered page.
+  const experienceSection = document.getElementById('about');
+  const servicesSection = document.getElementById('services');
+  if (experienceSection && servicesSection) servicesSection.before(experienceSection);
+
+  // Nav scroll state + mobile toggle
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+    if(!prefersReduced) {
+      const shift = Math.min(window.scrollY * 0.08, 30);
+      document.querySelectorAll('.hero-title .outline').forEach(el => el.style.transform = `translateX(${-shift}px)`);
+      document.querySelectorAll('.hero-title .solid').forEach(el => el.style.transform = `translateX(${shift}px)`);
+      const behind = document.querySelector('.hero-behind');
+      if(behind) behind.style.transform = `translate(-50%, calc(-50% + ${shift*1.5}px))`;
+    }
+  });
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Scroll reveal
+  const revealItems = document.querySelectorAll('.reveal');
+  if (prefersReduced) {
+    revealItems.forEach(item => item.classList.add('visible'));
+  } else {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+
+    revealItems.forEach(item => revealObserver.observe(item));
+  }
+
+  // ---------------------------------------------------------------
+  // WORK DATA
+  // Each project can carry MULTIPLE tags — it will surface under every
+  // matching filter, but only exists once in the grid/dataset.
+  //
+  // `galleries` holds one entry per tag: a card image (`img`) and an
+  // editable `frames` list for the modal carousel. Change any image
+  // path below to replace that exact gallery slide.
+  // ---------------------------------------------------------------
+
+  const tagLabels = {
+    branding: 'Brand Board',
+    social: 'Social Content',
+    packaging: 'Packaging Design',
+    email: 'Email Design',
+    collateral: 'Marketing Collateral',
+    video: 'Video Editing',
+    analytics: 'Social Media Analytics'
+  };
+
+  const projects = [
+    {
+      id: 'p1', title: "The Queen's Birthing Home, Clinics and Ultrasound — Caloocan",
+      tags: ['analytics'],
+      c1: '#2a2d2b', c2: '#14140f',
+      galleries: {
+        analytics: {
+          img: 'images/TQBCUC.png',
+          frames: [
+            { img: 'images/TQBCUC2.png' }
+          ]
+        }
+      }
+    },
+    {
+      id: 'p2', title: 'Dream Time Sleep Patch',
+      tags: ['branding', 'social', 'packaging', 'video'],
+      c1: '#39301f', c2: '#161410',
+      galleries: {
+        branding: {
+          img: 'images/dreamtime_social.png',
+          frames: [
+            { img: 'images/dreamtime.png' },
+            { img: 'images/dreamtime_sleeppatch.png' },
+            { img: 'images/dreamtime_sleeppatch2.png' },
+            { img: 'images/dreamtime_sleeppatch3.png' },
+            { img: 'images/dreamtime_sleeppatch4.png' },
+            { img: 'images/dreamtime_sleeppatch5.png' },
+            { img: 'images/dreamtime_sleeppatch6.png' },
+            {
+              type: 'facebook-video',
+              src: 'https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F856062404032062%2F&show_text=false&width=267&t=0'
+            },
+            {
+              type: 'facebook-video',
+              src: 'https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F834439582808924%2F&show_text=false&width=267&t=0'
+            },
+            {
+              type: 'video',
+              src: 'videos/dreamtime_sleeppatchreel.mp4'
+            }
+          ]
+        }
+      }
+    },
+    {
+      id: 'p3', title: 'Masculine Studios',
+      tags: ['branding'],
+      c1: '#242322', c2: '#121110',
+      galleries: {
+        branding: {
+          img: 'images/masculine.png',
+          frames: [
+            { img: 'images/masculine2.png' }
+          ]
+        }
+      }
+    },
+    {
+      id: 'p4', title: 'Dok Ace', modalTitle: 'Dok Ace Branding',
+      tags: ['social'],
+      c1: '#33251c', c2: '#161009',
+      galleries: {
+        social: {
+          img: 'images/dok_ace.png',
+          frames: [
+            { img: 'images/dok_acepage.png' },
+            { img: 'images/dok_acepage2.png' },
+          ]
+        }
+      }
+    },
+    {
+      id: 'p5', title: 'Lash & Nails Beauty Hub',
+      tags: ['social'],
+      c1: '#2d1f28', c2: '#130f14',
+      galleries: {
+        social: {
+          img: 'images/lash_nails.png',
+          frames: [
+            { img: 'images/lash_nails1.png' }
+          ]
+        }
+      }
+    },
+    {
+      id: 'p6', title: 'Sweet Lily Dessert House',
+      tags: ['social'],
+      c1: '#331f22', c2: '#160f10',
+      galleries: {
+        social: {
+          img: 'images/sweetlily.png',
+          frames: [
+          ]
+        }
+      }
+    },
+    {
+      id: 'p7', title: 'Segunda Moderna',
+      tags: ['social'],
+      c1: '#26221d', c2: '#121110',
+      galleries: {
+        social: {
+          img: 'images/segunda_moderna.png',
+          frames: [
+            { img: 'images/segunda_moderna2.png' },
+          ]
+        }
+      }
+    },
+    {
+      id: 'p8', title: 'KW Westlake Village 1',
+      tags: ['email' , 'collateral'],
+      c1: '#242830', c2: '#111318',
+      galleries: {
+        email: {
+          img: 'images/KWWV.png',
+          frames: [
+            { img: 'images/KWWV2.png' },
+            { img: 'images/KWWV3.png' },
+            { img: 'images/KWWV4.png' },
+            { img: 'images/KWWV5.png' },
+            { img: 'images/KWWV6.png' },
+            { img: 'images/KWWV7.png' },
+            { img: 'images/KWWV8.png' },
+            { img: 'images/KWWV9.png' },
+            { img: 'images/KWWV10.png' },
+            { img: 'images/KWWV11.png' },
+            { img: 'images/KWWV12.png' }
+          ]
+        }
+      }
+    },
+        {
+      id: 'p9', title: 'KW Westlake Village 2',
+      tags: ['email' ,  'video'],
+      c1: '#242830', c2: '#111318',
+      galleries: {
+        email: {
+          img: 'images/KWWV.png',
+          frames: [
+            { img: 'images/KWWV13.png' },
+            { img: 'images/KWWV14.png' },
+            { img: 'images/KWWV15.png' },
+            { img: 'images/KWWV16.png' },
+            { img: 'images/KWWV17.png' },
+            { img: 'images/KWWV18.png' },
+            { img: 'images/KWWV19.png' },
+            {
+              type: 'instagram-video',
+              src: 'https://www.instagram.com/reel/DSVTuHukU6Q/embed/'
+            },
+            {
+              type: 'instagram-video',
+              src: 'https://www.instagram.com/reel/DSksYASDxvh/embed/'
+            },
+            {
+              type: 'instagram-video',
+              src: 'https://www.instagram.com/reel/DTtCqI3kj57/embed/'
+            },
+            {
+              type: 'instagram-video',
+              src: 'https://www.instagram.com/reel/DSoCzKJAQcP/embed/'
+            },
+            {
+              type: 'video',
+              src: 'videos/KWWVreel.mp4'
+            },
+            {
+              type: 'video',
+              src: 'videos/KWWVreel2.mp4'
+            }
+          ]
+        }
+      }
+    },
+    {
+      id: 'p10', title: 'DOST-RWG (UP-NIGS)',
+      tags: ['video'],
+      c1: '#20242c', c2: '#0e1013',
+      galleries: {
+        video: {
+          img: 'images/RWG.png',
+          frames: [
+            {
+              type: 'video',
+              src: 'videos/RWG.mp4',
+              mimeType: 'video/mp4'
+            }
+          ]
+        }
+      }
+    }
+  ];
+
+  const grid = document.getElementById('workGrid');
+
+  function cardMarkup(project, activeTag) {
+    // Show the thumbnail/label for whichever category is currently
+    // being filtered (falls back to the project's first tag on "All").
+    const displayTag = (activeTag !== 'all' && project.tags.includes(activeTag)) ? activeTag : project.tags[0];
+    const gallery = project.galleries[displayTag] || project.galleries[project.tags[0]] || {};
+    const hasImage = Boolean(gallery.img);
+    const thumbContent = hasImage
+      ? `<img src="${gallery.img}" alt="${project.title}" loading="lazy">`
+      : `<span>${tagLabels[displayTag].toUpperCase()}</span>`;
+    const otherTags = project.tags.filter(t => t !== displayTag).map(t => tagLabels[t]);
+
+    return `
+      <div class="work-card" data-tags="${project.tags.join(',')}" data-id="${project.id}" style="--wc1:${project.c1};--wc2:${project.c2}">
+        <div class="work-thumb${hasImage ? ' has-image' : ''}">${thumbContent}</div>
+        <div class="work-meta">
+          <span class="tag">${tagLabels[displayTag]}</span>
+          <h4>${project.title}</h4>
+          ${otherTags.length ? `<p class="work-multitag">Also: ${otherTags.join(' · ')}</p>` : ''}
+        </div>
+      </div>
+    `;
+  }
+
+  function renderGrid(tag = 'all') {
+    const filtered = tag === 'all' ? projects : projects.filter(project => project.tags.includes(tag));
+    grid.innerHTML = filtered.length
+      ? filtered.map(project => cardMarkup(project, tag)).join('')
+      : `<div class="work-empty">No projects tagged “${tagLabels[tag] || tag}” yet.</div>`;
+  }
+
+  // Filters
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  filterBtns.forEach(btn => btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const tag = btn.dataset.tag;
+    const url = new URL(window.location);
+    if(tag === 'all') url.searchParams.delete('tag'); else url.searchParams.set('tag', tag);
+    window.history.replaceState({}, '', url);
+    renderGrid(tag);
+  }));
+
+  // Apply filter from URL on load
+  const initialTag = new URL(window.location).searchParams.get('tag');
+  if(initialTag){
+    const match = document.querySelector(`.filter-btn[data-tag="${initialTag}"]`);
+    if(match) match.click();
+  } else {
+    renderGrid('all');
+  }
+
+  // Modal gallery — combines the cover and every category frame into
+  // one browsable gallery. Edit each `img` path in the project data to
+  // replace a slide; labels are optional and are used only for accessibility.
+  const overlay = document.getElementById('modalOverlay');
+  const modalHero = document.getElementById('modalHero');
+  const modal = overlay.querySelector('.modal');
+  const modalClose = document.getElementById('modalClose');
+  const galleryPrev = document.getElementById('galleryPrev');
+  const galleryNext = document.getElementById('galleryNext');
+  const galleryThumbs = document.getElementById('galleryThumbs');
+  const galleryCounter = document.getElementById('galleryCounter');
+  let galleryItems = [];
+  let galleryIndex = 0;
+  let lastFocusedElement = null;
+  let touchStartX = 0;
+
+  const whatsappLink = document.getElementById('whatsappLink');
+  const whatsappQrModal = document.getElementById('whatsappQrModal');
+  const whatsappQrClose = document.getElementById('whatsappQrClose');
+  const whatsappQrDialog = whatsappQrModal.querySelector('.modal');
+
+  function closeWhatsappQr() {
+    whatsappQrModal.classList.remove('open');
+    whatsappQrModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  whatsappLink.addEventListener('click', e => {
+    e.preventDefault();
+    whatsappQrModal.classList.add('open');
+    whatsappQrModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    whatsappQrDialog.focus();
+  });
+  whatsappQrClose.addEventListener('click', closeWhatsappQr);
+  whatsappQrModal.addEventListener('click', e => {
+    if(e.target === whatsappQrModal) closeWhatsappQr();
+  });
+
+  function closeModal() {
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if(lastFocusedElement) lastFocusedElement.focus();
+  }
+
+  modalClose.addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if(e.target === overlay) closeModal(); });
+
+  function normaliseFrame(frame, fallbackLabel, category) {
+    if(typeof frame === 'string') return { label: fallbackLabel, img: frame, category };
+    return {
+      label: frame.label || fallbackLabel,
+      img: frame.img || '',
+      type: frame.type || 'image',
+      src: frame.src || '',
+      poster: frame.poster || '',
+      mimeType: frame.mimeType || 'video/mp4',
+      category
+    };
+  }
+
+  function buildGallery(project) {
+    const items = [];
+    project.tags.forEach(tag => {
+      const gallery = project.galleries[tag] || {};
+      if(gallery.img) {
+        items.push({ label: `${project.title} — ${tagLabels[tag]}`, img: gallery.img, category: tag });
+      }
+      (gallery.frames || []).forEach((frame, i) => {
+        items.push(normaliseFrame(frame, `${tagLabels[tag]} ${i + 1}`, tag));
+      });
+    });
+    return items.length ? items : [{ label: 'Project image', img: '', category: project.tags[0] }];
+  }
+
+  function showGalleryItem(index) {
+    galleryIndex = (index + galleryItems.length) % galleryItems.length;
+    const item = galleryItems[galleryIndex];
+    const isFacebookVideo = item.type === 'facebook-video' && item.src;
+    const isInstagramVideo = item.type === 'instagram-video' && item.src;
+    const isLocalVideo = item.type === 'video' && item.src;
+    const isEmbeddedVideo = isFacebookVideo || isInstagramVideo;
+    const isVideo = isEmbeddedVideo || isLocalVideo;
+    const videoPlatform = isInstagramVideo ? 'Instagram' : 'Facebook';
+    const videoWrapClass = isInstagramVideo ? 'instagram-video-wrap' : 'facebook-video-wrap';
+    const localPoster = item.poster ? ` poster="${item.poster}"` : '';
+    const visual = isLocalVideo
+      ? `<div class="local-video-wrap"><video class="local-video-player" controls playsinline preload="metadata"${localPoster}><source src="${item.src}" type="${item.mimeType}"></video></div>`
+      : isEmbeddedVideo
+      ? `<div class="embedded-video-wrap ${videoWrapClass}"><iframe class="embedded-video-frame" src="${item.src}" title="Embedded ${videoPlatform} Reel" scrolling="no" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>`
+      : item.img
+        ? `<img src="${item.img}" alt="${item.label}">`
+        : `<div class="gallery-empty"></div>`;
+
+    modalHero.querySelectorAll('img, .gallery-empty, .embedded-video-wrap, .local-video-wrap').forEach(el => el.remove());
+    modalHero.classList.toggle('has-video', Boolean(isVideo));
+    galleryNext.insertAdjacentHTML('beforebegin', visual);
+    galleryCounter.textContent = `${galleryIndex + 1} / ${galleryItems.length}`;
+    galleryPrev.disabled = galleryItems.length < 2;
+    galleryNext.disabled = galleryItems.length < 2;
+
+    galleryThumbs.querySelectorAll('.gallery-thumb').forEach((thumb, i) => {
+      const isActive = i === galleryIndex;
+      thumb.classList.toggle('active', isActive);
+      thumb.setAttribute('aria-current', isActive ? 'true' : 'false');
+      if(isActive) thumb.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'nearest', inline: 'center' });
+    });
+  }
+
+  galleryPrev.addEventListener('click', () => showGalleryItem(galleryIndex - 1));
+  galleryNext.addEventListener('click', () => showGalleryItem(galleryIndex + 1));
+  modalHero.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].clientX; }, { passive:true });
+  modalHero.addEventListener('touchend', e => {
+    const distance = e.changedTouches[0].clientX - touchStartX;
+    if(Math.abs(distance) > 45) showGalleryItem(galleryIndex + (distance < 0 ? 1 : -1));
+  }, { passive:true });
+
+  function openModal(project) {
+    document.getElementById('modalTag').textContent = project.tags.map(t => tagLabels[t]).join(' · ');
+    document.getElementById('modalTitle').textContent = project.modalTitle || project.title;
+    galleryItems = buildGallery(project);
+    galleryThumbs.innerHTML = galleryItems.map((item, i) => `
+      <button class="gallery-thumb${i === 0 ? ' active' : ''}" data-index="${i}" aria-label="View ${item.label}" aria-current="${i === 0 ? 'true' : 'false'}">
+        ${item.type === 'facebook-video' || item.type === 'instagram-video' || item.type === 'video'
+          ? `<span class="gallery-video-thumb" aria-hidden="true">▶</span>`
+          : item.img
+            ? `<img src="${item.img}" alt="" loading="lazy">`
+            : `<div class="gallery-empty"></div>`}
+      </button>
+    `).join('');
+    galleryThumbs.querySelectorAll('.gallery-thumb').forEach(thumb => {
+      thumb.addEventListener('click', () => showGalleryItem(Number(thumb.dataset.index)));
+    });
+    showGalleryItem(0);
+    lastFocusedElement = document.activeElement;
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    modal.focus();
+  }
+
+  document.addEventListener('keydown', e => {
+    if(whatsappQrModal.classList.contains('open') && e.key === 'Escape') {
+      closeWhatsappQr();
+      return;
+    }
+    if(!overlay.classList.contains('open')) return;
+    if(e.key === 'Escape') closeModal();
+    if(e.key === 'ArrowLeft') showGalleryItem(galleryIndex - 1);
+    if(e.key === 'ArrowRight') showGalleryItem(galleryIndex + 1);
+    if(e.key === 'Tab') {
+      const focusable = [...modal.querySelectorAll('button:not(:disabled), [href], [tabindex]:not([tabindex="-1"])')];
+      if(!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if(e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if(!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+
+  grid.addEventListener('click', e => {
+    const card = e.target.closest('.work-card');
+    if(!card) return;
+    const project = projects.find(x => x.id === card.dataset.id);
+    if(!project) return;
+    openModal(project);
+  });
+
+  // Testimonial slider
+  const slides = document.querySelectorAll('.testi-slide');
+  const testiNav = document.getElementById('testiNav');
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'testi-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => showSlide(i));
+    testiNav.appendChild(dot);
+  });
+  let current = 0;
+  function showSlide(i){
+    slides[current].classList.remove('active');
+    testiNav.children[current].classList.remove('active');
+    current = i;
+    slides[current].classList.add('active');
+    testiNav.children[current].classList.add('active');
+  }
+  setInterval(() => { if(!prefersReduced) showSlide((current + 1) % slides.length); }, 6000);
+
+// Professional landing animation
+(() => {
+  const animationStyle = document.createElement('style');
+
+  animationStyle.textContent = `
+    .hero-type > *,
+    .hero-portrait,
+    .hero-behind {
+      opacity: 0;
+      transform: translateY(28px);
+      transition:
+        opacity .85s cubic-bezier(.2,.7,.2,1),
+        transform .85s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .hero-type > *:nth-child(1) { transition-delay: .1s; }
+    .hero-type > *:nth-child(2) { transition-delay: .2s; }
+    .hero-type > *:nth-child(3) { transition-delay: .38s; }
+    .hero-type > *:nth-child(4) { transition-delay: .52s; }
+
+    .hero-portrait {
+      transform: translateY(42px) scale(.94);
+      transition-delay: .28s;
+    }
+
+    .hero-behind {
+      transform: translate(-50%, -42%);
+      transition-delay: .05s;
+    }
+
+    .hero-loaded .hero-type > *,
+    .hero-loaded .hero-portrait,
+    .hero-loaded .hero-behind {
+      opacity: 1;
+      transform: none;
+    }
+
+    .hero-loaded .hero-behind {
+      transform: translate(-50%, -50%);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-type > *,
+      .hero-portrait,
+      .hero-behind {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+  `;
+
+  document.head.appendChild(animationStyle);
+
+  if (prefersReduced) return;
+
+  const startHeroAnimation = () => {
+    requestAnimationFrame(() => {
+      document.querySelector('.hero')?.classList.add('hero-loaded');
+    });
+  };
+
+  if (document.readyState === 'complete') {
+    startHeroAnimation();
+  } else {
+    window.addEventListener('load', startHeroAnimation, { once: true });
+  }
+})();
+</script>
+
+</body>
+</html>
